@@ -1,6 +1,4 @@
 ---
-id: module-1-chapter-1
-slug: /module-1/chapter-1
 title: "Chapter 1: ROS 2 Architecture"
 sidebar_position: 2
 ---

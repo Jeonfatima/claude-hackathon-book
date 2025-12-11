@@ -1,6 +1,4 @@
 ---
-id: module-3-chapter-1
-slug: /module-3/chapter-1
 title: "Chapter 1: Isaac Sim and Synthetic Data"
 sidebar_position: 2
 ---

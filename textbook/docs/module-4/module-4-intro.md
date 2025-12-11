@@ -1,6 +1,4 @@
 ---
-id: module-4-intro
-slug: /module-4/intro
 title: "Module 4: Vision-Language-Action (VLA)"
 sidebar_position: 1
 ---

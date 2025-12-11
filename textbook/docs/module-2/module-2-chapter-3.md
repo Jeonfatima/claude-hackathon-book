@@ -1,6 +1,4 @@
 ---
-id: module-2-chapter-3
-slug: /module-2/chapter-3
 title: "Chapter 3: Sensor Simulation (LiDAR, Cameras, IMU)"
 sidebar_position: 4
 ---

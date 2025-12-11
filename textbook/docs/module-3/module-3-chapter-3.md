@@ -1,6 +1,4 @@
 ---
-id: module-3-chapter-3
-slug: /module-3/chapter-3
 title: "Chapter 3: Path Planning & Bipedal Movement"
 sidebar_position: 4
 ---

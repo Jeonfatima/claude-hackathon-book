@@ -1,6 +1,4 @@
 ---
-id: module-1-chapter-3
-slug: /module-1/chapter-3
 title: "Chapter 3: Python Agents with ROS Controllers"
 sidebar_position: 4
 ---

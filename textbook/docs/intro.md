@@ -1,6 +1,5 @@
 ---
-id: intro
-slug: /
+id: home
 title: Introduction to Physical AI & Humanoid Robotics
 sidebar_position: 1
 ---

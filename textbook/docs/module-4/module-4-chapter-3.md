@@ -1,6 +1,4 @@
 ---
-id: module-4-chapter-3
-slug: /module-4/chapter-3
 title: "Chapter 3: Capstone: Autonomous Humanoid"
 sidebar_position: 4
 ---

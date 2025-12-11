@@ -1,6 +1,4 @@
 ---
-id: module-4-chapter-2
-slug: /module-4/chapter-2
 title: "Chapter 2: Cognitive Planning with LLMs"
 sidebar_position: 3
 ---

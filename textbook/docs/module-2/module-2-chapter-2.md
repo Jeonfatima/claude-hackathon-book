@@ -1,6 +1,4 @@
 ---
-id: module-2-chapter-2
-slug: /module-2/chapter-2
 title: "Chapter 2: Unity Visualization & Interaction"
 sidebar_position: 3
 ---

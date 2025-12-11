@@ -1,6 +1,4 @@
 ---
-id: module-1-chapter-2
-slug: /module-1/chapter-2
 title: "Chapter 2: Nodes, Topics, Services, and Actions"
 sidebar_position: 3
 ---

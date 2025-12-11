@@ -1,6 +1,4 @@
 ---
-id: module-4-chapter-1
-slug: /module-4/chapter-1
 title: "Chapter 1: Voice-to-Action with Whisper"
 sidebar_position: 2
 ---

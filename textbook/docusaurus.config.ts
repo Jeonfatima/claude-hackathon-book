@@ -104,7 +104,7 @@ const config: Config = {
           items: [
             {
               label: 'Introduction',
-              to: '/intro',
+              to: '/',
             },
           ],
         },
@@ -113,19 +113,19 @@ const config: Config = {
           items: [
             {
               label: 'Module 1: ROS 2',
-              to: '/module-1/intro',
+              to: 'module-1/module-1-intro',
             },
             {
               label: 'Module 2: Digital Twin',
-              to: '/module-2/intro',
+              to: 'module-2/module-2-intro',
             },
             {
               label: 'Module 3: AI-Robot Brain',
-              to: '/module-3/intro',
+              to: 'module-3/module-3-intro',
             },
             {
               label: 'Module 4: Vision-Language-Action',
-              to: '/module-4/intro',
+              to: 'module-4/module-4-intro',
             },
           ],
         },

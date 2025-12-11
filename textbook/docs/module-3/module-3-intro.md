@@ -1,6 +1,4 @@
 ---
-id: module-3-intro
-slug: /module-3/intro
 title: "Module 3: The AI-Robot Brain (NVIDIA Isaac™)"
 sidebar_position: 1
 ---

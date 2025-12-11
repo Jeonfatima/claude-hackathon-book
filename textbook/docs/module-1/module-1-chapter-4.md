@@ -1,6 +1,4 @@
 ---
-id: module-1-chapter-4
-slug: /module-1/chapter-4
 title: "Chapter 4: URDF for Humanoids"
 sidebar_position: 5
 ---

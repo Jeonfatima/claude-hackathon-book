@@ -1,6 +1,4 @@
 ---
-id: module-2-intro
-slug: /module-2/intro
 title: "Module 2: The Digital Twin (Gazebo & Unity)"
 sidebar_position: 1
 ---

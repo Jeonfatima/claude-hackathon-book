@@ -1,6 +1,4 @@
 ---
-id: module-2-chapter-1
-slug: /module-2/chapter-1
 title: "Chapter 1: Gazebo Physics Simulation"
 sidebar_position: 2
 ---

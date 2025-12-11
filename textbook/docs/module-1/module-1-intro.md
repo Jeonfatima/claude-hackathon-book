@@ -1,6 +1,4 @@
 ---
-id: module-1-intro
-slug: /module-1/intro
 title: "Module 1: The Robotic Nervous System (ROS 2)"
 sidebar_position: 1
 ---

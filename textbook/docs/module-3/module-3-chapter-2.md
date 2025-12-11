@@ -1,6 +1,4 @@
 ---
-id: module-3-chapter-2
-slug: /module-3/chapter-2
 title: "Chapter 2: Isaac ROS: VSLAM & Navigation"
 sidebar_position: 3
 ---
