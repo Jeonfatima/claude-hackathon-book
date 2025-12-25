@@ -1,0 +1,176 @@
+openapi: 3.0.0
+info:
+  title: RAG Retrieval Testing API
+  description: API for testing RAG retrieval pipeline accuracy
+  version: 1.0.0
+paths:
+  /test-retrieval:
+    post:
+      summary: Test the RAG retrieval pipeline
+      description: Query the vector database and validate retrieved results
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RetrievalTestRequest'
+      responses:
+        '200':
+          description: Retrieval test results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RetrievalTestResponse'
+        '400':
+          description: Invalid request parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error during retrieval test
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /validate-connection:
+    get:
+      summary: Validate connection to vector database
+      description: Check if the system can connect to Qdrant
+      responses:
+        '200':
+          description: Connection is valid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionStatus'
+        '500':
+          description: Connection failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    RetrievalTestRequest:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The text query to test retrieval with
+          example: "What is ROS 2?"
+        top_k:
+          type: integer
+          description: Number of top results to retrieve
+          default: 3
+          minimum: 1
+          maximum: 10
+        expected_content:
+          type: string
+          description: Expected content for validation (optional)
+          example: "ROS 2 is a flexible framework for writing robot software"
+      required:
+        - query
+
+    RetrievalTestResponse:
+      type: object
+      properties:
+        query:
+          type: string
+          description: The original query text
+        retrieved_chunks:
+          type: array
+          items:
+            $ref: '#/components/schemas/RetrievedChunk'
+        execution_time:
+          type: number
+          format: float
+          description: Time taken to execute the retrieval in seconds
+        validation_results:
+          $ref: '#/components/schemas/ValidationResults'
+
+    RetrievedChunk:
+      type: object
+      properties:
+        content:
+          type: string
+          description: The retrieved text content
+        similarity_score:
+          type: number
+          format: float
+          description: Semantic similarity score (0-1)
+        metadata:
+          type: object
+          properties:
+            url:
+              type: string
+              description: Source URL of the chunk
+            chunk_id:
+              type: string
+              description: Unique identifier for the chunk
+        validation_status:
+          type: string
+          description: Validation result (pass/fail)
+          enum: [pass, fail]
+
+    ValidationResults:
+      type: object
+      properties:
+        content_accuracy:
+          type: number
+          format: float
+          description: Percentage of chunks with accurate content (0-100)
+        metadata_correctness:
+          type: number
+          format: float
+          description: Percentage of chunks with correct metadata (0-100)
+        top_k_relevance:
+          type: number
+          format: float
+          description: Relevance score of top-k results (0-100)
+        overall_status:
+          type: string
+          description: Overall validation status
+          enum: [pass, fail]
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/ValidationDetail'
+
+    ValidationDetail:
+      type: object
+      properties:
+        chunk_id:
+          type: string
+          description: Identifier of the chunk being validated
+        content_match:
+          type: boolean
+          description: Whether content matches expected value
+        metadata_match:
+          type: boolean
+          description: Whether metadata matches expected value
+        similarity_score:
+          type: number
+          format: float
+          description: Actual similarity score
+
+    ConnectionStatus:
+      type: object
+      properties:
+        connected:
+          type: boolean
+          description: Whether connection to vector database is successful
+        collection_exists:
+          type: boolean
+          description: Whether the expected collection exists
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+        code:
+          type: string
+          description: Error code

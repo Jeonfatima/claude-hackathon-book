@@ -1,0 +1,59 @@
+.popup {
+  position: absolute;
+  z-index: 10000;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 0;
+  margin: 0;
+  pointer-events: auto;
+  transform: translate(-50%, -100%);
+  min-width: 160px;
+}
+
+.popupButton {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.popupButton:hover {
+  background: linear-gradient(135deg, #7a1bdb 0%, #3585ff 100%);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-1px);
+}
+
+.popupButton:active {
+  transform: translateY(0);
+}
+
+/* Ensure the popup stays within viewport bounds */
+.popup::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+}
+
+/* Adjust position if too close to left edge */
+.left-edge {
+  transform: translate(0, -100%) !important;
+}
+
+/* Adjust position if too close to right edge */
+.right-edge {
+  transform: translate(-100%, -100%) !important;
+}

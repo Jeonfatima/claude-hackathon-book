@@ -1,0 +1,191 @@
+openapi: 3.0.3
+info:
+  title: RAG Agent API
+  description: API for the Retrieval-Augmented Generation agent that answers questions based on book content
+  version: 1.0.0
+servers:
+  - url: http://localhost:8000
+    description: Development server
+paths:
+  /query:
+    post:
+      summary: Submit a query to the RAG agent
+      description: Processes a user query and returns an answer based on retrieved content from the vector database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QueryRequest'
+      responses:
+        '200':
+          description: Successful response with answer and sources
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QueryResponse'
+        '400':
+          description: Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      security:
+        - apiKey: []
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Returns the health status of the service
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+        '500':
+          description: Service is unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    QueryRequest:
+      type: object
+      required:
+        - question
+      properties:
+        question:
+          type: string
+          description: The user's question to be answered
+          example: "What are the key principles of retrieval-augmented generation?"
+          minLength: 1
+          maxLength: 1000
+    QueryResponse:
+      type: object
+      required:
+        - answer
+        - sources
+        - query_id
+        - response_timestamp
+      properties:
+        answer:
+          type: string
+          description: The generated answer based on retrieved content
+          example: "Retrieval-Augmented Generation (RAG) combines information retrieval with text generation..."
+          minLength: 50
+          maxLength: 5000
+        sources:
+          type: array
+          description: List of sources used to generate the answer
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/Source'
+        query_id:
+          type: string
+          description: Unique identifier for the query
+          example: "123e4567-e89b-12d3-a456-426614174000"
+        response_timestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the response was generated
+          example: "2025-12-17T10:30:00Z"
+        confidence_score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Confidence level in the answer (optional)
+          example: 0.85
+    Source:
+      type: object
+      required:
+        - source_url
+        - document_title
+        - excerpt
+        - similarity_score
+      properties:
+        source_url:
+          type: string
+          description: URL of the source document
+          example: "https://example.com/textbook/chapter1.html"
+        document_title:
+          type: string
+          description: Title of the source document
+          example: "Chapter 1: Introduction to AI"
+        excerpt:
+          type: string
+          description: Relevant excerpt from the source
+          example: "Retrieval-Augmented Generation (RAG) is a technique that..."
+        similarity_score:
+          type: number
+          format: float
+          minimum: 0
+          maximum: 1
+          description: Relevance score of this source
+          example: 0.92
+    ErrorResponse:
+      type: object
+      required:
+        - error_code
+        - message
+        - timestamp
+      properties:
+        error_code:
+          type: string
+          description: Machine-readable error code
+          enum:
+            - QUERY_TOO_SHORT
+            - NO_RELEVANT_CONTENT
+            - LLM_ERROR
+            - VECTOR_DB_ERROR
+            - SERVICE_UNAVAILABLE
+            - INVALID_INPUT
+            - RATE_LIMIT_EXCEEDED
+          example: "NO_RELEVANT_CONTENT"
+        message:
+          type: string
+          description: Human-readable error message
+          example: "No relevant content found in the vector database"
+        details:
+          type: object
+          description: Additional error details (optional)
+          example:
+            query_length: 3
+        timestamp:
+          type: string
+          format: date-time
+          description: Timestamp when the error occurred
+          example: "2025-12-17T10:30:00Z"
+    HealthResponse:
+      type: object
+      required:
+        - status
+      properties:
+        status:
+          type: string
+          description: Health status of the service
+          enum:
+            - healthy
+            - degraded
+            - unhealthy
+          example: "healthy"
+        details:
+          type: object
+          description: Additional health details (optional)
+          example:
+            database_status: "connected"
+            llm_status: "available"
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: API key for authentication

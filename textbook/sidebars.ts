@@ -5,7 +5,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Introduction',
-      items: ['home'],
+      items: ['home', 'text-selection-popup'],
       link: { type: 'doc', id: 'home' },
     },
     {
